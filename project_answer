@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Blog</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <h1>Welcome to My Blog</h1>
+  </header>
+
+  <main>
+    <section>
+      <article>
+        <h2>Post Title 1</h2>
+        <p>This is the content of the first blog post. Lorem ipsum dolor sit amet...</p>
+        <button onclick="likePost(1)">Like</button> <span id="likes-1">0</span> likes
+      </article>
+
+      <article>
+        <h2>Post Title 2</h2>
+        <p>This is the content of the second blog post. More placeholder content here...</p>
+        <button onclick="likePost(2)">Like</button> <span id="likes-2">0</span> likes
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 My Blog. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function likePost(postId) {
+      const key = `likes-${postId}`;
+      const current = localStorage.getItem(key) || 0;
+      const newCount = parseInt(current) + 1;
+      localStorage.setItem(key, newCount);
+      document.getElementById(key).textContent = newCount;
+    }
+
+    // On load
+    window.onload = () => {
+      [1, 2].forEach((id) => {
+        const key = `likes-${id}`;
+        const saved = localStorage.getItem(key);
+        if (saved) document.getElementById(key).textContent = saved;
+      });
+    }
+  </script>
+</body>
+</html>
